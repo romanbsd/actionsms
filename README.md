@@ -6,6 +6,7 @@ ActionSMS was inspired by ActionMailer and it aims to provide a unified interfac
 
 ```ruby
 # config/initializers/sms.rb
+require 'sms/method/twilio'
 Sms.delivery_method = Sms::Method::Twilio.new(account_sid, auth_token, default_from)
 
 ```
