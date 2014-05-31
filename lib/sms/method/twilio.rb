@@ -21,7 +21,7 @@ class Sms
       private
       # Set up a client to talk to the Twilio REST API
       def client
-        @client ||= Twilio::REST::Client.new(@account_sid, @auth_token)
+        @client ||= ::Twilio::REST::Client.new(@account_sid, @auth_token)
       end
     end
   end
