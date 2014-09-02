@@ -15,7 +15,7 @@ class Sms
       # @param [Sms::Message] sms
       def deliver!(sms)
         from = sms.from || @from
-        client.account.sms.messages.create(from: from, to: sms.to, body: sms.text)
+        client.account.messages.create(from: from, to: sms.to, body: sms.text)
       end
 
       private
