@@ -11,9 +11,9 @@ describe Sms do
 
     it 'notifies the listeners' do
       listener = double('listener')
-      listener.should_receive(:call) do |*params|
-        params.first.should eq('deliver.sms')
-        params.last.should eq(hash)
+      expect(listener).to receive(:call) do |*params|
+        expect(params.first).to eq('deliver.sms')
+        expect(params.last).to eq(hash)
       end
       subscriber = ActiveSupport::Notifications.subscribe('deliver.sms', listener)
       Sms.deliver_sms(message) {}
@@ -31,17 +31,17 @@ describe Sms do
 
     it 'receives messages' do
       receiver = double('receiver').tap do |m|
-        m.should_receive(:receive) {|msg| msg.serializable_hash.should == hash}
+        expect(m).to receive(:receive) {|msg| expect(msg.serializable_hash).to eq(hash)}
       end
-      Receiver.should_receive(:new).and_return(receiver)
+      expect(Receiver).to receive(:new).and_return(receiver)
       Receiver.receive(hash)
     end
 
     it 'notifies the listeners' do
       listener = double('listener')
-      listener.should_receive(:call) do |*params|
-        params.first.should eq('receive.sms')
-        params.last.should eq(hash)
+      expect(listener).to receive(:call) do |*params|
+        expect(params.first).to eq('receive.sms')
+        expect(params.last).to eq(hash)
       end
       subscriber = ActiveSupport::Notifications.subscribe('receive.sms', listener)
       Receiver.receive(hash)

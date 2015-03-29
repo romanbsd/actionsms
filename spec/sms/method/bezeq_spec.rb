@@ -42,12 +42,12 @@ describe Sms::Method::Bezeq do
     stub_request(:post, url).with(body: body).
       to_return(status: 400, body: 'Malformed Request', headers: {})
 
-    lambda {message.deliver}.should raise_error(Sms::DeliveryError)
+    expect {message.deliver}.to raise_error(Sms::DeliveryError)
     begin
       message.deliver
     rescue Sms::DeliveryError => e
-      e.code.should eq(400)
-      e.message.should eq('Malformed Request')
+      expect(e.code).to eq(400)
+      expect(e.message).to eq('Malformed Request')
     end
   end
 end
