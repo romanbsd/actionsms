@@ -3,7 +3,7 @@ source "http://rubygems.org"
 gem "activesupport", ">= 3.2"
 
 group :development do
-  gem 'rspec', '~>3.2.0'
+  gem 'rspec', '~>3.8.0'
   gem 'rdoc'
   gem 'bundler'
   gem 'jeweler'
